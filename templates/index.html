@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VkBot Admin Panel</title>
+    <style>
+        table {
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            text-decoration: none;
+            border: 1px solid grey;
+            padding: 5px 10px;
+            text-transform: uppercase;
+            border-radius: 5px;
+        }
+
+        .btn-red {
+            background-color: lightcoral;
+        }
+
+        .btn-blue {
+            background-color: lightblue;
+        }
+
+        .btn-red:hover {
+            background-color: red;
+        }
+
+        .btn-blue:hover {
+            background-color: blue;
+        }
+
+        .btn-add {
+            background-color: lightgreen;
+        }
+
+        .btn-add:hover {
+            background-color: green;
+        }
+
+        td {
+            border-bottom: 1px solid grey;
+            width: 100px;
+            height: 60px;
+        }
+
+        .group-text {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    {% for group in groups %}
+        <tr>
+            <td class="group-text">{{ group }}</td>
+            <td><a href="update/{{ group.lower() }}" class="btn btn-blue">Изменить</a></td>
+            <td><a href="delete/{{ group.lower() }}" class="btn btn-red">Удалить</a></td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="/add" class="btn btn-add">Добавить группу</a>
+</body>
+</html>
