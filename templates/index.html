@@ -7,6 +7,13 @@
         table {
             border-spacing: 0;
             margin-bottom: 20px;
+            float: left;
+        }
+
+        .buttons-add-change {
+            float: left;
+            padding-top: 20px;
+            padding-left: 50px;
         }
 
         .btn {
@@ -15,6 +22,10 @@
             padding: 5px 10px;
             text-transform: uppercase;
             border-radius: 5px;
+        }
+
+        .btn:hover {
+            color: white;
         }
 
         .btn-red {
@@ -41,6 +52,14 @@
             background-color: green;
         }
 
+        .btn-change-texts {
+            background-color: lightblue;
+        }
+
+        .btn-change-texts:hover {
+            background-color: blue;
+        }
+
         td {
             border-bottom: 1px solid grey;
             width: 100px;
@@ -53,6 +72,7 @@
     </style>
 </head>
 <body>
+<div class="container">
 <table>
     {% for group in groups %}
         <tr>
@@ -62,6 +82,10 @@
         </tr>
     {% endfor %}
 </table>
-<a href="/add" class="btn btn-add">Добавить группу</a>
+<div class="buttons-add-change">
+    <a href="/add" class="btn btn-add">Добавить группу</a>
+    <a href="/change_texts" class="btn btn-change-texts">Редактировать тексты</a>
+</div>
+</div>
 </body>
 </html>

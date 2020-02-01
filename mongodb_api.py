@@ -29,5 +29,19 @@ class MongoApi:
             '$set': data
         }, upsert=False)
 
+    def get_texts(self):
+        texts = []
+        for text in self.db.texts.find():
+            texts.append(text)
+        return texts
+
+    def update_texts(self, texts):
+        for key in texts.keys():
+            self.db.texts.update_one({
+                '_id': key
+            }, {
+                '$set': {'text': texts[key]}
+            }, upsert=False)
+
 
 mongo_client = MongoApi()
