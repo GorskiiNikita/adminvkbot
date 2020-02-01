@@ -21,6 +21,7 @@
         form {
             margin-top: 30px;
         }
+
     </style>
 </head>
 <body>
@@ -30,7 +31,7 @@
 {% for text in texts %}
     <tr>
         <td><label for={{ text['_id'] }}>{{ text['description'] }}:</label></td>
-        <td><textarea name="{{ text['_id'] }}" required id="{{ text['_id'] }}">{{ text['text'] }}</textarea></td>
+        <td><textarea cols="30" rows="3" name="{{ text['_id'] }}" required id="{{ text['_id'] }}">{{ text['text'] }}</textarea></td>
     </tr>
 {% endfor %}
 </table>
