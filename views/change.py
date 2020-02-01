@@ -10,3 +10,8 @@ def change_texts():
     if request.method == 'GET':
         texts = mongo_client.get_texts()
         return render_template('change_texts.html', texts=texts)
+
+    texts = dict(request.form)
+    mongo_client.update_texts(texts)
+
+    return redirect(url_for('index_page'))
