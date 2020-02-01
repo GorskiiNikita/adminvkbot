@@ -29,5 +29,11 @@ class MongoApi:
             '$set': data
         }, upsert=False)
 
+    def get_texts(self):
+        texts = []
+        for text in self.db.texts.find():
+            texts.append(text)
+        return texts
+
 
 mongo_client = MongoApi()
