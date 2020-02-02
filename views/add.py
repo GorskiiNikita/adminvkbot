@@ -86,5 +86,6 @@ def add_page():
                 entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [{'name': numerator, 'where': group_data[f'{i + 1}_{j + 1}_wherenumerator']},
                                                           {'name': denumerator, 'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator']}]
 
+    mongo_client.update_time_groups()
     mongo_client.add_group(entry)
     return redirect(url_for('index_page'))
