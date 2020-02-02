@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+from datetime import datetime
 
 class MongoApi:
 
@@ -42,6 +42,22 @@ class MongoApi:
             }, {
                 '$set': {'text': texts[key]}
             }, upsert=False)
+
+    def update_time_texts(self):
+        now = int(datetime.now().timestamp())
+        self.db.times.update_one({
+            '_id': 'last_update_texts'
+        }, {
+            '$set': {'timestamp': now}
+        }, upsert=False)
+
+    def update_time_groups(self):
+        now = int(datetime.now().timestamp())
+        self.db.times.update_one({
+            '_id': 'last_update_groups'
+        }, {
+            '$set': {'timestamp': now}
+        }, upsert=False)
 
 
 mongo_client = MongoApi()
