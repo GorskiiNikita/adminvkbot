@@ -14,6 +14,5 @@ def change_texts():
     texts = dict(request.form)
     mongo_client.update_texts(texts)
     mongo_client.update_time_texts()
-    mongo_client.update_time_groups()
 
     return redirect(url_for('index_page'))
