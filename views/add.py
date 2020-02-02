@@ -27,7 +27,7 @@ def add_page():
     group_data = dict(request.form)
     group_id = group_data.pop('group')
 
-    entry = {'_id': request.form.get('group').lower(),
+    entry = {'_id': request.form.get('group').lower().strip(),
              'monday': {
                  'first': None,
                  'second': None,
