@@ -10,7 +10,7 @@
             float: left;
         }
 
-        .buttons-add-change {
+        .buttons {
             float: left;
             padding-top: 20px;
             padding-left: 50px;
@@ -60,6 +60,14 @@
             background-color: blue;
         }
 
+        .btn-mass-sending {
+            background-color: coral;
+        }
+
+        .btn-mass-sending:hover {
+            background-color: brown;
+        }
+
         td {
             border-bottom: 1px solid grey;
             width: 100px;
@@ -82,9 +90,10 @@
         </tr>
     {% endfor %}
 </table>
-<div class="buttons-add-change">
+<div class="buttons">
     <a href="/add" class="btn btn-add">Добавить группу</a>
     <a href="/change_texts" class="btn btn-change-texts">Редактировать тексты</a>
+    <a href="/mass_sending" class="btn btn-mass-sending">Массовая рассылка</a>
 </div>
 </div>
 </body>
