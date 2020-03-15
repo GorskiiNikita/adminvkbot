@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from datetime import datetime
 
+
 class MongoApi:
 
     def __init__(self):
@@ -12,6 +13,12 @@ class MongoApi:
         for group in self.db.groups.find():
             groups.append(group['_id'])
         return groups
+
+    def get_users(self):
+        users = []
+        for user in self.db.users.find():
+            users.append(user['_id'])
+        return users
 
     def add_group(self, group):
         self.db.groups.insert_one(group)

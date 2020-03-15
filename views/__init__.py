@@ -6,3 +6,4 @@ from .add import add_page
 from .delete import delete_group
 from .update import update_group
 from .change import change_texts
+from .mass_sender import send
