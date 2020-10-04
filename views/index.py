@@ -9,5 +9,5 @@ def index_page():
         list_of_versions.sort()
         cur_version_index = list_of_versions.index(mongo_client.get_current_schedule_version())
         list_of_versions[0], list_of_versions[cur_version_index] = list_of_versions[cur_version_index], list_of_versions[0]
-        return render_template('index.html', groups=list_of_groups, schedule_versions=list_of_versions)
+        return render_template('index.html', groups=list_of_groups, schedule_versions=list_of_versions, schedule_enable=mongo_client.get_schedule_status())
     return redirect(url_for('login_page'))

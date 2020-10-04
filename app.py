@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
-from views import login_page, index_page, logout, add_page, delete_group, update_group, change_texts, send, checkout
+from views import login_page, index_page, logout, add_page, delete_group, update_group, change_texts, send, checkout, on_off
 
 
 app = Flask(__name__)
@@ -16,6 +16,7 @@ app.add_url_rule('/delete/<key>', view_func=delete_group)
 app.add_url_rule('/change_texts', view_func=change_texts, methods=['GET', 'POST'])
 app.add_url_rule('/mass_sending', view_func=send, methods=['GET', 'POST'])
 app.add_url_rule('/checkout', view_func=checkout, methods=['POST'])
+app.add_url_rule('/schedule_on_off', view_func=on_off, methods=['POST'])
 
 
 if __name__ == '__main__':

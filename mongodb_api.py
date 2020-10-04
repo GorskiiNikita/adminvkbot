@@ -103,5 +103,22 @@ class MongoApi:
     def get_list_of_versions(self):
         return [schedule['_id'] for schedule in self.db.schedules.find()]
 
+    def get_schedule_status(self):
+        return self.db.settings.find_one({'_id': 'main'})['schedule_enabled']
+
+    def disable_schedule(self):
+        self.db.settings.update_one({
+            '_id': 'main'
+        }, {
+            '$set': {'schedule_enabled': False}
+        }, upsert=False)
+
+    def enable_schedule(self):
+        self.db.settings.update_one({
+            '_id': 'main'
+        }, {
+            '$set': {'schedule_enabled': True}
+        }, upsert=False)
+
 
 mongo_client = MongoApi()

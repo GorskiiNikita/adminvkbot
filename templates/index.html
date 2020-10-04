@@ -111,6 +111,15 @@
       <label>Название версии: <input type="text" name="new-version"></label>
       <button name="action" value="new">Создать новую версию</button>
     </form>
+    <br>
+    <br>
+    <form action="schedule_on_off" method="post">
+      {% if schedule_enable %}
+        <button name="turn" value="off">Выключить расписание</button>
+      {% else %}
+        <button name="turn" value="on">Включить расписание</button>
+      {% endif %}
+    </form>
   </div>
 </div>
 </body>
