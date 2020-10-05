@@ -13,5 +13,7 @@ def checkout():
         mongo_client.checkout_schedule_version(form_data.get('new-version'))
     elif action == 'exist':
         mongo_client.checkout_schedule_version(form_data.get('schedule-versions'))
+    elif action == 'copy':
+        mongo_client.checkout_schedule_version(form_data.get('new-version'), form_data.get('schedule-versions'))
 
     return redirect(url_for('index_page'))

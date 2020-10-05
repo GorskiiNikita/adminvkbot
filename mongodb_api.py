@@ -67,7 +67,7 @@ class MongoApi:
             '$set': {'timestamp': now}
         }, upsert=False)
 
-    def checkout_schedule_version(self, new_version):
+    def checkout_schedule_version(self, new_version, original_version=None):
         version_exist = new_version in self.get_list_of_versions()
         old_version = self.get_current_schedule_version()
         self.update_current_schedule_version(new_version)
@@ -76,6 +76,9 @@ class MongoApi:
 
         if version_exist:
             new_schedule = self.db.schedules.find_one({'_id': new_version})['schedule']
+        elif original_version:
+            new_schedule = self.db.schedules.find_one({'_id': original_version})['schedule']
+            self.save_schedule_version(new_version, new_schedule)
         else:
             new_schedule = []
             self.save_schedule_version(new_version, new_schedule)
