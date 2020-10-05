@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <title>VkBot Admin Panel</title>
     <style>
+
+        body {
+          min-width: 1200px;
+        }
+
+        .left-container {
+          float: left;
+        }
+
+        .right-container {
+          float: left;
+          margin-left: 10%;
+        }
+
         table {
             border-spacing: 0;
             margin-bottom: 20px;
@@ -11,9 +25,7 @@
         }
 
         .buttons {
-            float: left;
             padding-top: 20px;
-            padding-left: 50px;
         }
 
         .btn {
@@ -44,28 +56,12 @@
             background-color: blue;
         }
 
-        .btn-add {
+        .btn-action {
             background-color: lightgreen;
         }
 
-        .btn-add:hover {
+        .btn-action:hover {
             background-color: green;
-        }
-
-        .btn-change-texts {
-            background-color: lightblue;
-        }
-
-        .btn-change-texts:hover {
-            background-color: blue;
-        }
-
-        .btn-mass-sending {
-            background-color: coral;
-        }
-
-        .btn-mass-sending:hover {
-            background-color: brown;
         }
 
         td {
@@ -77,24 +73,54 @@
         .group-text {
             font-size: 18px;
         }
+
+        .schedule-versions {
+          margin-top: 30px;
+        }
     </style>
 </head>
 <body>
-<div class="container">
-<table>
-    {% for group in groups %}
-        <tr>
-            <td class="group-text">{{ group }}</td>
-            <td><a href="update/{{ group.lower() }}" class="btn btn-blue">Изменить</a></td>
-            <td><a href="delete/{{ group.lower() }}" class="btn btn-red">Удалить</a></td>
-        </tr>
-    {% endfor %}
-</table>
-<div class="buttons">
-    <a href="/adminvkbot/add" class="btn btn-add">Добавить группу</a>
-    <a href="/adminvkbot/change_texts" class="btn btn-change-texts">Редактировать тексты</a>
-    <a href="/adminvkbot/mass_sending" class="btn btn-mass-sending">Массовая рассылка</a>
+<div class="left-container">
+  <table>
+      {% for group in groups %}
+          <tr>
+              <td class="group-text">{{ group }}</td>
+              <td><a href="update/{{ group.lower() }}" class="btn btn-blue">Изменить</a></td>
+              <td><a href="delete/{{ group.lower() }}" class="btn btn-red">Удалить</a></td>
+          </tr>
+      {% endfor %}
+  </table>
 </div>
+<div class="right-container">
+  <div class="buttons">
+    <a href="add" class="btn btn-action">Добавить группу</a>
+    <a href="change_texts" class="btn btn-action">Редактировать тексты</a>
+    <a href="mass_sending" class="btn btn-action">Массовая рассылка</a>
+  </div>
+  <div class="schedule-versions">
+    <form action="checkout" method="post">
+      <label for="schedule-versions">Выберите версию расписания:</label>
+      <select name="schedule-versions" id="schedule-versions">
+        {% for schedule_version in schedule_versions %}
+        <option value="{{ schedule_version }}">{{ schedule_version }}</option>
+        {% endfor %}
+      </select>
+       <button name="action" value="exist">Применить версию</button>
+      <br>
+      <br>
+      <label>Название версии: <input type="text" name="new-version"></label>
+      <button name="action" value="new">Создать новую версию</button>
+    </form>
+    <br>
+    <br>
+    <form action="schedule_on_off" method="post">
+      {% if schedule_enable %}
+        <button name="turn" value="off">Выключить расписание</button>
+      {% else %}
+        <button name="turn" value="on">Включить расписание</button>
+      {% endif %}
+    </form>
+  </div>
 </div>
 </body>
 </html>
