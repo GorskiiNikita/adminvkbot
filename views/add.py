@@ -72,19 +72,27 @@ def add_page():
 
     for i in range(0, 6):
         for j in range(0, 5):
-            numerator = group_data[f'{i+1}_{j+1}_numerator']
-            denumerator = group_data[f'{i+1}_{j+1}_denumerator']
+            numerator = group_data[f'{i+1}_{j+1}_numerator'].strip()
+            denumerator = group_data[f'{i+1}_{j+1}_denumerator'].strip()
             if numerator == '' and denumerator == '':
                 continue
             elif numerator != '' and denumerator == '':
-                entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [{'name': numerator, 'where': group_data[f'{i+1}_{j+1}_wherenumerator']},
+                entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [{'name': numerator,
+                                                           'where': group_data[f'{i+1}_{j+1}_wherenumerator'],
+                                                           'teacher': group_data[f'{i+1}_{j+1}_teachernumerator']},
                                                           None]
             elif numerator == '' and denumerator != '':
                 entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [None,
-                                                         {'name': denumerator, 'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator']}]
+                                                         {'name': denumerator,
+                                                          'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator'],
+                                                          'teacher': group_data[f'{i+1}_{j+1}_teacherdenumerator']}]
             else:
-                entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [{'name': numerator, 'where': group_data[f'{i + 1}_{j + 1}_wherenumerator']},
-                                                          {'name': denumerator, 'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator']}]
+                entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [{'name': numerator,
+                                                           'where': group_data[f'{i + 1}_{j + 1}_wherenumerator'],
+                                                           'teacher': group_data[f'{i+1}_{j+1}_teachernumerator']},
+                                                          {'name': denumerator,
+                                                           'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator'],
+                                                           'teacher': group_data[f'{i+1}_{j+1}_teacherdenumerator']}]
 
     mongo_client.update_time_groups()
     mongo_client.add_group(entry)

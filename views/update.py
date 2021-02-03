@@ -32,21 +32,28 @@ def update_group(key):
                     resp[f'{i + 1}_{j + 1}_denumerator'] = ''
                     resp[f'{i + 1}_{j + 1}_wherenumerator'] = ''
                     resp[f'{i + 1}_{j + 1}_wheredenumerator'] = ''
+                    resp[f'{i + 1}_{j + 1}_teachernumerator'] = ''
+                    resp[f'{i + 1}_{j + 1}_teacherdenumerator'] = ''
+
                     continue
 
                 if group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][0] is None:
                     resp[f'{i + 1}_{j + 1}_numerator'] = ''
                     resp[f'{i + 1}_{j + 1}_wherenumerator'] = ''
+                    resp[f'{i + 1}_{j + 1}_teachernumerator'] = ''
                 else:
                     resp[f'{i + 1}_{j + 1}_numerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][0]['name']
                     resp[f'{i + 1}_{j + 1}_wherenumerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][0]['where']
+                    resp[f'{i + 1}_{j + 1}_teachernumerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][0]['teacher']
 
                 if group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][1] is None:
                     resp[f'{i + 1}_{j + 1}_denumerator'] = ''
                     resp[f'{i + 1}_{j + 1}_wheredenumerator'] = ''
+                    resp[f'{i + 1}_{j + 1}_teacherdenumerator'] = ''
                 else:
                     resp[f'{i + 1}_{j + 1}_denumerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][1]['name']
                     resp[f'{i + 1}_{j + 1}_wheredenumerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][1]['where']
+                    resp[f'{i + 1}_{j + 1}_teacherdenumerator'] = group_data[REVERSE_WEEKDAYS[i]][LESSONS[j]][1]['teacher']
 
         return render_template('update_page.html', weekdays=WEEKDAYS, lessons=LESSONS_TIME, data=resp, group_id=key)
 
@@ -96,22 +103,29 @@ def update_group(key):
 
     for i in range(0, 6):
         for j in range(0, 5):
-            numerator = group_data[f'{i + 1}_{j + 1}_numerator']
-            denumerator = group_data[f'{i + 1}_{j + 1}_denumerator']
+            numerator = group_data[f'{i + 1}_{j + 1}_numerator'].strip()
+            denumerator = group_data[f'{i + 1}_{j + 1}_denumerator'].strip()
             if numerator == '' and denumerator == '':
                 continue
             elif numerator != '' and denumerator == '':
                 entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [
-                    {'name': numerator, 'where': group_data[f'{i + 1}_{j + 1}_wherenumerator']},
+                    {'name': numerator,
+                     'where': group_data[f'{i + 1}_{j + 1}_wherenumerator'],
+                     'teacher': group_data[f'{i + 1}_{j + 1}_teachernumerator']},
                     None]
             elif numerator == '' and denumerator != '':
                 entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [None,
                                                           {'name': denumerator,
-                                                           'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator']}]
+                                                           'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator'],
+                                                           'teacher': group_data[f'{i + 1}_{j + 1}_teacherdenumerator']}]
             else:
                 entry[REVERSE_WEEKDAYS[i]][LESSONS[j]] = [
-                    {'name': numerator, 'where': group_data[f'{i + 1}_{j + 1}_wherenumerator']},
-                    {'name': denumerator, 'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator']}]
+                    {'name': numerator,
+                     'where': group_data[f'{i + 1}_{j + 1}_wherenumerator'],
+                     'teacher': group_data[f'{i + 1}_{j + 1}_teachernumerator']},
+                    {'name': denumerator,
+                     'where': group_data[f'{i + 1}_{j + 1}_wheredenumerator'],
+                     'teacher': group_data[f'{i + 1}_{j + 1}_teacherdenumerator']}]
 
     mongo_client.update_group(key, entry)
     return redirect(url_for('index_page'))

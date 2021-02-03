@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить группу</title>
+    <title>Изменить группу</title>
     <style>
         .div-table {
             border-bottom: 2px solid black;
@@ -56,6 +56,9 @@
                 <td>Аудитория:</td>
                 <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_wherenumerator"
                 value="{{ data[weekday[0]+'_'+lesson[0] +'_wherenumerator'] }}"></td>
+                <td>Преподаватель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_teachernumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_teachernumerator'] }}"></td>
             </tr>
             <tr class="bottom">
                 <td></td>
@@ -65,6 +68,9 @@
                 <td>Аудитория:</td>
                 <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_wheredenumerator"
                 value="{{ data[weekday[0]+'_'+lesson[0] +'_wheredenumerator'] }}"></td>
+                <td>Преподаватель:</td>
+                <td><input type="text" name="{{ weekday[0] }}_{{ lesson[0] }}_teacherdenumerator"
+                value="{{ data[weekday[0]+'_'+lesson[0] +'_teacherdenumerator'] }}"></td>
             </tr>
             <tr>
                 <td class="space"></td>
